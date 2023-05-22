@@ -14,12 +14,32 @@
         padding: 0;
         margin: 0;
     }
+
+    .form-container {
+        height: 100vh;
+    }
+
+    .scroll-container {
+        overflow-y: scroll;
+        height: 100vh;
+    }
+
+    @media (max-width: 800px) {
+        .scroll-container {
+            overflow-y: auto;
+            height: auto;
+        }
+
+        .form-container {
+            height: auto;
+        }
+    }
 </style>
 
 <body>
     <div class="container-fluid">
         <div class="row g-1">
-            <div class="col-12 col-md-4 bg-light p-2 vh-100">
+            <div class="col-12 col-md-4 bg-light p-2 form-container">
                 <form>
                     <div class="mb-1">
                         <span class="fs-4">Add User</span>
@@ -55,7 +75,7 @@
                     </div>
                 </form>
             </div>
-            <div class="col-12 col-md-8 vh-100">
+            <div class="col-12 col-md-8 scroll-container">
                 <div class="container-fluid mt-2">
                     <div class="row g-1" id="row-list">
                     </div>
