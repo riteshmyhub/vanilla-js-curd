@@ -28,7 +28,7 @@ class App extends UserDataBase {
 
    isActive = (status) => {
       if (!status) {
-         location.replace("/#/all");
+         location.replace("/vanilla-js-curd/#/all");
       }
       for (let index = 0; index < this.navtabs.children.length; index++) {
          const element = this.navtabs.children[index];
