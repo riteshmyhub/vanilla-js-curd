@@ -25,15 +25,18 @@ class App extends UserDataBase {
          modal.removeAttribute("aria-labelledby");
       }
    };
-
-   isActive = (status) => {
+   redirect = (status) => {
       if (!status) {
          if (location.hostname === "riteshmyhub.github.io") {
             location.replace("/vanilla-js-curd/#/all");
-         }else{
+         } else {
             location.replace("#/all");
          }
       }
+   };
+
+   isActive = (status) => {
+      this.redirect(status);
       for (let index = 0; index < this.navtabs.children.length; index++) {
          const element = this.navtabs.children[index];
          let linkStatus = element.getAttribute("data-active-link");
@@ -76,7 +79,7 @@ class App extends UserDataBase {
          this._updateById(this.form.getAttribute("data-form-id"), user);
       } else {
          this.addUser(user);
-         location.replace("/#/all");
+         this.redirect(null);
       }
       this.form.removeAttribute("data-form-id");
       event.target.reset();
