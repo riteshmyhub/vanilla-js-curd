@@ -1,7 +1,7 @@
 function toastify(message) {
    Toastify({
       text: message,
-      duration: 3000,
+      duration: 1000,
       newWindow: true,
       close: false,
       gravity: "top", // `top` or `bottom`
@@ -14,47 +14,51 @@ function toastify(message) {
    }).showToast();
 }
 
-export default class UserDataBase {
+
+export default class LocalDataBase {
+   #config = Object.freeze({
+      dbName: "task",
+   });
    refresher;
    status = null;
    loading = false;
-   taskList = JSON.parse(localStorage.getItem("task")) || [];
+   taskList = JSON.parse(localStorage.getItem(this.#config.dbName)) || [];
    constructor() {
       window.addEventListener("hashchange", () => {
          this.status = location.hash.replace("#/", "");
          this.refresher();
       });
    }
-   _createUser = (task) => {
+   _create = (task) => {
       this.taskList = [...this.taskList, task];
-      localStorage.setItem("task", JSON.stringify(this.taskList));
+      localStorage.setItem(this.#config.dbName, JSON.stringify(this.taskList));
       this.refresher();
       toastify(`task successfully created!`);
    };
    //
    _deleteById = (id) => {
       this.taskList = this.taskList.filter((item) => item?.id !== id);
-      localStorage.setItem("task", JSON.stringify([...this.taskList]));
+      localStorage.setItem(this.#config.dbName, JSON.stringify([...this.taskList]));
       this.refresher();
       toastify(`task successfully deleted!`);
    };
    //
-   _deleteUsersList = () => {
+   _deleteAllList = () => {
       this.taskList = [];
-      localStorage.setItem("task", JSON.stringify(this.taskList));
+      localStorage.setItem(this.#config.dbName, JSON.stringify(this.taskList));
       this.refresher();
       toastify(`removed all task!`);
    };
    //
    _updateById = (id, task) => {
       this.taskList.forEach((item) => {
-         if (task?.id === id) {
+         if (item?.id === id) {
             item.title_task = task?.title_task;
             item.discription = task?.discription;
             item.category = task?.category;
          }
       });
-      localStorage.setItem("task", JSON.stringify([...this.taskList]));
+      localStorage.setItem(this.#config.dbName, JSON.stringify([...this.taskList]));
       this.refresher();
       toastify(`task successfully update!`);
    };
@@ -65,7 +69,7 @@ export default class UserDataBase {
             item.status = status;
          }
       });
-      localStorage.setItem("task", JSON.stringify([...this.taskList]));
+      localStorage.setItem(this.#config.dbName, JSON.stringify([...this.taskList]));
       setTimeout(() => {
          this.refresher();
          toastify(`your task status is ${status}`);

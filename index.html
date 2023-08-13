@@ -16,18 +16,20 @@
 <body>
     <div class="container-fluid">
         <div class="row g-1">
-            <div class="col-12 col-md-4 col-lg-4 col-xl-4" id="modal">
+            <div class="col-12 col-md-4 col-lg-4 col-xl-4" id="app-modal">
                 <form class="p-3" data-form-name="user-form">
                     <div class="fs-2 mb-3">
                         New Task Todo
                     </div>
                     <div class="row my-2">
                         <label for="personal" class="col-6 col-md-6">
-                            <input type="radio" class="form-check-input" value="personal" name="category" id="personal" required>
+                            <input type="radio" class="form-check-input" value="personal" name="category" id="personal"
+                                required>
                             <span role="button" class="cursor-pointer">Personal</span>
                         </label>
                         <label for="teams" class="col-6 col-md-6">
-                            <input type="radio" class="form-check-input" value="teams" name="category" id="teams" required>
+                            <input type="radio" class="form-check-input" value="teams" name="category" id="teams"
+                                required>
                             <span role="button" class="cursor-pointer">Teams</span>
                         </label>
                     </div>
@@ -54,8 +56,7 @@
                     <div class="fs-2 mb-3">
                         Task Todo List
                     </div>
-                    <button type="button" class="btn btn-primary btn-lg fab-btn" data-bs-toggle="offcanvas"
-                        data-bs-target="#modal">
+                    <button type="button" class="btn btn-primary btn-lg fab-btn" data-drawer-button="open">
                         <i class="bi bi-plus-lg"></i>
                     </button>
                     <ul class="nav nav-pills" id="nav-tabs">
@@ -79,7 +80,6 @@
             </div>
         </div>
     </div>
-
     <!--  -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"

@@ -1,28 +1,29 @@
-import UserDataBase from "./js/db.js";
+import LocalDataBase from "./js/local-database.js";
 
-class App extends UserDataBase {
+class App extends LocalDataBase {
    form = document.getElementsByTagName("form")[0];
    #ul = document.getElementById("ul-box");
    status = document.querySelector(`[name="status"]`);
    resetAppBtn = document.getElementById("reset-app-btn");
    navtabs = document.getElementById("nav-tabs");
+   modal = document.getElementById("app-modal");
+   bootstrapOffcanvas = new bootstrap.Offcanvas(document.getElementById("app-modal"));
+   openButton = document.querySelectorAll(`[data-drawer-button="open"]`)[0];
 
    constructor() {
       super();
       this.refresher = this.render;
    }
 
-   model_container = (width) => {
-      let modal = document.getElementById("modal");
-      let btn = document.querySelectorAll('[type="submit"]')[0];
+   drawer_init = (width) => {
       if (width <= 767) {
-         modal.classList.add("offcanvas", "offcanvas-bottom", "h-auto");
-         modal.setAttribute("tabindex", -1);
-         modal.setAttribute("aria-labelledby", "modalLabel");
+         this.modal.classList.add("offcanvas", "offcanvas-bottom", "h-auto");
+         this.modal.setAttribute("tabindex", -1);
+         this.modal.setAttribute("aria-labelledby", "modalLabel");
       } else {
-         modal.classList.remove("offcanvas", "offcanvas-bottom", "h-auto");
-         modal.removeAttribute("tabindex");
-         modal.removeAttribute("aria-labelledby");
+         this.modal.classList.remove("offcanvas", "offcanvas-bottom", "h-auto");
+         this.modal.removeAttribute("tabindex");
+         this.modal.removeAttribute("aria-labelledby");
       }
    };
    redirect = (status) => {
@@ -48,11 +49,11 @@ class App extends UserDataBase {
       }
    };
    addUser = (user) => {
-      this._createUser(user);
+      this._create(user);
    };
 
    resetApp = () => {
-      this._deleteUsersList();
+      this._deleteAllList();
    };
 
    deleteUser = (event) => {
@@ -77,8 +78,10 @@ class App extends UserDataBase {
       if (this.form.getAttribute("data-form-id")) {
          delete user.id;
          this._updateById(this.form.getAttribute("data-form-id"), user);
+         this.bootstrapOffcanvas.hide();
       } else {
          this.addUser(user);
+         this.bootstrapOffcanvas.hide();
          this.redirect(null);
       }
       this.form.removeAttribute("data-form-id");
@@ -87,6 +90,7 @@ class App extends UserDataBase {
 
    edit = (event) => {
       if (event.target.getAttribute("data-event-mode") === "edit") {
+         app.bootstrapOffcanvas.show();
          let id = event.target.getAttribute("data-id");
          this.taskList.forEach((task) => {
             if (task?.id === id) {
@@ -184,5 +188,8 @@ app.render();
 app.form.addEventListener("submit", app.onSubmit);
 app.resetAppBtn.addEventListener("click", app.resetApp);
 
-window.addEventListener("load", (e) => app.model_container(window.innerWidth));
-window.addEventListener("resize", (e) => app.model_container(e.target.innerWidth));
+window.addEventListener("load", (e) => app.drawer_init(window.innerWidth));
+window.addEventListener("resize", (e) => app.drawer_init(e.target.innerWidth));
+app.openButton.addEventListener("click", () => {
+   app.bootstrapOffcanvas.show();
+});
