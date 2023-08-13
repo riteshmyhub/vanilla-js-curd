@@ -1,1 +1,0 @@
-app-link - https://riteshmyhub.github.io/vanilla-js-curd/

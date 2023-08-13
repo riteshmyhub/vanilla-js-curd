@@ -3,87 +3,90 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Compiled and minified CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="./styles/styles.css">
     <title>home</title>
 </head>
-<style>
-    * {
-        padding: 0;
-        margin: 0;
-    }
-
-    .form-container {
-        height: 100vh;
-    }
-
-    .scroll-container {
-        overflow-y: scroll;
-        height: 100vh;
-    }
-
-    @media (max-width: 800px) {
-        .scroll-container {
-            overflow-y: auto;
-            height: auto;
-        }
-
-        .form-container {
-            height: auto;
-        }
-    }
-</style>
 
 <body>
     <div class="container-fluid">
         <div class="row g-1">
-            <div class="col-12 col-md-4 bg-light p-2 form-container">
-                <form>
-                    <div class="mb-1">
-                        <span class="fs-4">Add User</span>
+            <div class="col-12 col-md-4 col-lg-4 col-xl-4" id="modal">
+                <form class="p-3" data-form-name="user-form">
+                    <div class="fs-2 mb-3">
+                        New Task Todo
                     </div>
-                    <div class="mb-2" id="upload-box">
-                        <img src="./user.png" class="img-fluid"
-                            style="height: 130px;width: 130px;margin: auto;display: block;" id="avatar-img" alt="">
-                        <label for="avatar" class="form-label">
-                            <input type="file" name="avatar" id="avatar" accept="image/*" required>
+                    <div class="row my-2">
+                        <label for="personal" class="col-6 col-md-6">
+                            <input type="radio" class="form-check-input" value="personal" name="category" id="personal" required>
+                            <span role="button" class="cursor-pointer">Personal</span>
+                        </label>
+                        <label for="teams" class="col-6 col-md-6">
+                            <input type="radio" class="form-check-input" value="teams" name="category" id="teams" required>
+                            <span role="button" class="cursor-pointer">Teams</span>
                         </label>
                     </div>
-                    <div class="mb-2">
-                        <label for="username" class="form-label">username</label>
-                        <input type="text" class="form-control" name="username" id="username" required>
+                    <div class="my-2">
+                        <label for="title_task" class="form-label">title task</label>
+                        <input type="text" name="title_task" id="title_task" class="form-control form-control-sm"
+                            autocomplete="off" required>
                     </div>
-                    <div class="mb-2">
-                        <label for="theme" class="form-label">theme</label>
-                        <select class="form-select" id="theme" name="theme">
-                            <option value="" disabled selected>
-                                select themes
-                            </option>
-                            <option value="#0D6EFD">Primary</option>
-                            <option value="#6C757D">Secondary</option>
-                            <option value="#198754">Success</option>
-                            <option value="#DC3545">Danger</option>
-                            <option value="#FFC107">Warning</option>
-                            <option value="#0DCAF0">Info</option>
-                            <option value="#212529">Dark</option>
-                        </select>
+                    <div class="my-2">
+                        <label for="lastname" class="form-label">Discription</label>
+                        <textarea name="discription" id="discription" class="form-control" rows="3" autocomplete="off"
+                            required></textarea>
                     </div>
-                    <div class="mb-3">
-                        <button class="btn btn-sm btn-primary w-100" type="submit">Submit</button>
+                    <div class="my-3">
+                        <button type="submit" class="btn btn-primary text-uppercase">submit</button>
+                        <button class="btn btn-danger text-uppercase" type="button" id="reset-app-btn">
+                            delete all users
+                        </button>
                     </div>
                 </form>
             </div>
-            <div class="col-12 col-md-8 scroll-container">
-                <div class="container-fluid mt-2">
-                    <div class="row g-1" id="row-list">
+            <div class="col-12 col-md-8 col-lg-8 col-xl-8">
+                <div class="p-3">
+                    <div class="fs-2 mb-3">
+                        Task Todo List
+                    </div>
+                    <button type="button" class="btn btn-primary btn-lg fab-btn" data-bs-toggle="offcanvas"
+                        data-bs-target="#modal">
+                        <i class="bi bi-plus-lg"></i>
+                    </button>
+                    <ul class="nav nav-pills" id="nav-tabs">
+                        <li class="nav-item" data-active-link="all">
+                            <button class="nav-link text-uppercase" onclick="location.replace('/#/all')">
+                                all
+                            </button>
+                        </li>
+                        <li class="nav-item" data-active-link="pending">
+                            <button class="nav-link text-uppercase"
+                                onclick="location.replace('/#/pending')">pending</button>
+                        </li>
+                        <li class="nav-item" data-active-link="done">
+                            <button class="nav-link text-uppercase" onclick="location.replace('/#/done')">done</button>
+                        </li>
+                    </ul>
+                    <div id="ul-box">
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <script src="./index.js"></script>
+
+    <!--  -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+    <script src="./main.js" type="module"> </script>
+    <!--  -->
 </body>
 
 </html>

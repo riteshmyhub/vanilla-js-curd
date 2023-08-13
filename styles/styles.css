@@ -1,0 +1,38 @@
+* {
+   margin: 0;
+   padding: 0;
+}
+body {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+.card {
+   box-shadow: none !important;
+   padding: 12px !important;
+}
+.card-border {
+   border: 1px solid #d5d2d2;
+   border-radius: 10px;
+}
+.category-chip {
+   position: absolute;
+   top: 5px;
+   right: 3px;
+}
+.row {
+   margin-bottom: 0px;
+}
+.fab-btn {
+   display: none;
+}
+@media only screen and (max-width: 600px) {
+   .fab-btn {
+      position: fixed !important;
+      bottom: 20px;
+      right: 20px;
+      z-index: 12;
+      border-radius: 50%;
+      display: block;
+   }
+}
