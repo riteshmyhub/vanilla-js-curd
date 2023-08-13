@@ -22,7 +22,6 @@ export default class UserDataBase {
    constructor() {
       window.addEventListener("hashchange", () => {
          this.status = location.hash.replace("#/", "");
-         console.log( this.status);
          this.refresher();
       });
    }

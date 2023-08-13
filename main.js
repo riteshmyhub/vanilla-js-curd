@@ -28,7 +28,11 @@ class App extends UserDataBase {
 
    isActive = (status) => {
       if (!status) {
-         location.replace("/vanilla-js-curd/#/all");
+         if (location.hostname === "riteshmyhub.github.io") {
+            location.replace("/vanilla-js-curd/#/all");
+         }else{
+            location.replace("#/all");
+         }
       }
       for (let index = 0; index < this.navtabs.children.length; index++) {
          const element = this.navtabs.children[index];
