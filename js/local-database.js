@@ -10,7 +10,7 @@ function toastify(message) {
       style: {
          background: "#28A745",
       },
-      onClick: function () {}, // Callback after click
+      onClick: function () {}, // Callback after click dfsfs
    }).showToast();
 }
 
