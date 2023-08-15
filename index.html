@@ -14,9 +14,9 @@
 </head>
 
 <body>
-    <div class="container-fluid">
+    <main class="container-fluid">
         <div class="row g-1">
-            <div class="col-12 col-md-4 col-lg-4 col-xl-4" id="app-modal">
+            <aside class="col-12 col-md-4 col-lg-4 col-xl-4" id="app-modal">
                 <form class="p-3" data-form-name="user-form">
                     <div class="fs-2 mb-3">
                         New Task Todo
@@ -34,12 +34,12 @@
                         </label>
                     </div>
                     <div class="my-2">
-                        <label for="title_task" class="form-label">title task</label>
+                        <label for="title_task" role="button" class="form-label">title task</label>
                         <input type="text" name="title_task" id="title_task" class="form-control form-control-sm"
                             autocomplete="off" required>
                     </div>
                     <div class="my-2">
-                        <label for="lastname" class="form-label">Discription</label>
+                        <label for="discription" role="button" class="form-label">Discription</label>
                         <textarea name="discription" id="discription" class="form-control" rows="3" autocomplete="off"
                             required></textarea>
                     </div>
@@ -50,8 +50,8 @@
                         </button>
                     </div>
                 </form>
-            </div>
-            <div class="col-12 col-md-8 col-lg-8 col-xl-8">
+            </aside>
+            <section class="col-12 col-md-8 col-lg-8 col-xl-8">
                 <div class="p-3">
                     <div class="fs-2 mb-3">
                         Task Todo List
@@ -77,9 +77,9 @@
 
                     </div>
                 </div>
-            </div>
+            </section>
         </div>
-    </div>
+    </main>
     <!--  -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"

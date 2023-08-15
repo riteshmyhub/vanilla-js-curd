@@ -48,15 +48,15 @@ class App extends LocalDataBase {
          }
       }
    };
-   addUser = (user) => {
-      this._create(user);
+   addTask = (task) => {
+      this._create(task);
    };
 
    resetApp = () => {
       this._deleteAllList();
    };
 
-   deleteUser = (event) => {
+   deleteTask = (event) => {
       if (event.target.getAttribute("data-event-mode") === "delete") {
          let id = event.target.getAttribute("data-id");
          this._deleteById(id);
@@ -65,9 +65,19 @@ class App extends LocalDataBase {
 
    onSubmit = (event) => {
       event.preventDefault();
+      const { name, value } = event.target;
+      let formValue = {
+         category: "",
+         title_task: "",
+         discription: "",
+      };
+      console.log({
+         ...formValue,
+         [name]: value,
+      });
       let data = new FormData(event.target);
 
-      let user = {
+      let task = {
          id: `task-id-${Date.now()}`,
          title_task: data.get("title_task"),
          discription: data.get("discription"),
@@ -76,11 +86,11 @@ class App extends LocalDataBase {
       };
 
       if (this.form.getAttribute("data-form-id")) {
-         delete user.id;
-         this._updateById(this.form.getAttribute("data-form-id"), user);
+         delete task.id;
+         this._updateById(this.form.getAttribute("data-form-id"), task);
          this.bootstrapOffcanvas.hide();
       } else {
-         this.addUser(user);
+         this.addTask(task);
          this.bootstrapOffcanvas.hide();
          this.redirect(null);
       }
@@ -177,7 +187,7 @@ class App extends LocalDataBase {
             <div>you don't have task in ${location.hash.replace("#/", "")}</div>
          </div>`;
 
-      this.#ul.addEventListener("click", this.deleteUser);
+      this.#ul.addEventListener("click", this.deleteTask);
       this.#ul.addEventListener("click", this.edit);
       this.#ul.addEventListener("change", this.onStatusChange);
    };
