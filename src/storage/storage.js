@@ -1,21 +1,5 @@
-function toastify(message) {
-   Toastify({
-      text: message,
-      duration: 1000,
-      newWindow: true,
-      close: false,
-      gravity: "top", // `top` or `bottom`
-      position: "center", // `left`, `center` or `right`
-      stopOnFocus: true, // Prevents dismissing of toast on hover
-      style: {
-         background: "#28A745",
-      },
-      onClick: function () {}, // Callback after click dfsfs
-   }).showToast();
-}
-
-
-export default class LocalDataBase {
+import toastify from "../libs/toastify.js";
+export default class Storage {
    #config = Object.freeze({
       dbName: "task",
    });
@@ -25,10 +9,12 @@ export default class LocalDataBase {
    taskList = JSON.parse(localStorage.getItem(this.#config.dbName)) || [];
    constructor() {
       window.addEventListener("hashchange", () => {
-         this.status = location.hash.replace("#/", "");
+         const url = new URL(location.href.replace("#/", ""));
+         this.status = url.searchParams.get("status");
          this.refresher();
       });
    }
+
    _create = (task) => {
       this.taskList = [...this.taskList, task];
       localStorage.setItem(this.#config.dbName, JSON.stringify(this.taskList));

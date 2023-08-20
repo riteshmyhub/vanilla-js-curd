@@ -1,0 +1,65 @@
+<div>
+   {{#if loading}}
+   <div class="card">
+      <div class="d-flex justify-content-center my-3">
+         <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+         </div>
+      </div>
+   </div>
+   {{else}}
+   {{#if tasks.length}}
+   <div id="list-container">
+      {{#each tasks as |element|}}
+      <div class="card mt-2 p-3 position-relative">
+         <div class="row align-items-center">
+            <div class="col-12 col-md-6">
+               <span>
+                  id : {{element.id}}
+               </span>
+            </div>
+            <div class="col-12 col-md-6 text-end">
+               <span
+                  class="badge rounded-pill bg-{{#ifEquals element.category 'personal' }}primary{{else}}danger{{/ifEquals}} text-uppercase py-1 px-2">
+                  {{element.category}}
+               </span>
+            </div>
+            <div class="col-12 col-md-9 col-lg-9">
+               <span class="fs-4">
+                  Title : {{element.title_task}}
+               </span>
+               <div class="text-muted my-2">
+                  {{element.discription}}
+               </div>
+            </div>
+            <div class="col-12 col-md-3 col-lg-3">
+               <div class="form-check form-switch">
+                  <input class="form-check-input" data-status-id="{{element.id}}" {{#ifEquals element.status 'done'
+                     }}checked{{/ifEquals}} type="checkbox" role="switch" id="{{element.id}}" />
+                  <label class="form-check-label" for="{{element.id}}">
+                     {{element.status}}
+                  </label>
+               </div>
+            </div>
+            <div class="col-12">
+               <button class="btn btn-sm btn-outline-primary text-uppercase" 
+               data-edit-id="{{element.id}}">
+                  edit
+               </button>
+               <button class="btn btn-sm btn-outline-danger text-uppercase" 
+               data-delete-id="{{element.id}}">
+                  delete
+               </button>
+            </div>
+         </div>
+      </div>
+      {{/each}}
+   </div>
+   {{else}}
+   <div class="alert alert-primary d-flex align-items-center my-3" role="alert">
+      <i class="bi bi-info-circle-fill me-2"></i>
+      <div>you don't have task in </div>
+   </div>
+   {{/if}}
+   {{/if}}
+</div>
